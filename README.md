@@ -1,5 +1,10 @@
 # TraceGenAI – AI Agent for Analyzing Production Logs and Performing RCA
 
+## Architecture
+<img width="2048" height="2080" alt="Gemini_Generated_Image_lggbrulggbrulggb" src="https://github.com/user-attachments/assets/9fab509d-4255-42a4-9a6e-e5d85860a1d3" />
+
+
+
 ## Tech Stack Used
 
 - LangChain
