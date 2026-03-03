@@ -1,0 +1,11 @@
+This doc contains infrastructure related information
+
+Deployment-Information
+
+All Services are deployed in Kubernetes cluster
+
+| Application     | Region   | Deployment          |
+| --------------- | -------- | ------------------- |
+| order-service   | us-east1 | kubernetes-pod-1245 |
+| loyalty-service | us-east2 | kubernetes-pod-3646 |
+| payment-service | us-east1 | kubernetes-pod-3750 |

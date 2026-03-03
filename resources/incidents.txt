@@ -1,0 +1,167 @@
+INCIDENT # 1
+
+Title: Disk Space Issue in Kubernetes Pods
+
+Description:
+We are observing the following warning logs in the beauty-box-service:
+
+2024-03-01 14:22:31 WARNING [Application: beauty-box-service] Disk space low on server prod-db-05. Only 30% remaining. Action required.
+
+Immediate action is required to prevent service degradation and potential outages.
+
+Reporter:
+Waqar Mansoor
+
+Assignee:
+SRE-Team - L1
+
+Resolution:
+The issue was caused by excessive usage of space because of the log file. As a temporary mitigation, the affected Kubernetes pods were restarted. A permanent fix will require code-level optimization to control memory usage.
+
+Status:
+Resolved
+
+Comments / Timeline:
+SRE-Team - L1: Investigating the issue. Can you confirm the frequency of occurrence?
+Waqar Mansoor: Not exactly sure about the frequency.
+SRE-Team - L1: We will restart the pods and monitor the behavior.
+Waqar Mansoor: Sure.
+SRE-Team - L1: The warning logs are no longer appearing. Please continue monitoring.
+Waqar Mansoor: Will do.
+SRE-Team - L1: Closing the incident as the issue is no longer observed.
+
+------------------------------------------------------------------------------
+
+INCIDENT # 2
+
+Title: High CPU Utilization in Order Processing Service
+
+Description:
+We are observing sustained high CPU usage in the order-processing-service pods, causing increased request latency and intermittent timeouts.
+
+2024-03-02 10:15:47 ERROR [Application: order-processing-service] CPU usage exceeded 90% threshold for more than 10 minutes.
+
+Immediate action is required to prevent customer impact and service degradation.
+
+Reporter:
+Waqar Mansoor
+
+Assignee:
+SRE-Team - L2
+
+Resolution:
+The issue was caused by an infinite retry loop triggered by a failed downstream dependency. The faulty logic was fixed and a new build was deployed. CPU utilization returned to normal levels after deployment.
+
+Status:
+Resolved
+
+Comments / Timeline:
+SRE-Team - L2: Investigating the CPU spike and analyzing thread dumps.
+Waqar Mansoor: Let me know if any logs or traces are required.
+SRE-Team - L2: Identified a retry loop causing thread starvation. Preparing a hotfix.
+Waqar Mansoor: Sounds good.
+SRE-Team - L2: Deployed the fix and CPU usage has normalized.
+Waqar Mansoor: Confirmed, metrics look stable.
+SRE-Team - L2: Closing the incident.
+
+----------------------------------------------------------------------------------
+
+INCIDENT # 3
+
+Title: Kafka Consumer Lag Spike in Payment Service
+
+Description:
+Kafka consumer lag has significantly increased for the payment-events topic, resulting in delayed payment processing.
+
+2024-03-02 11:40:12 WARN [Application: payment-service] Consumer lag exceeded 50000 messages.
+
+Immediate remediation is required to prevent payment delays and order failures.
+
+Reporter:
+Waqar Mansoor
+
+Assignee:
+Platform-Team - L1
+
+Resolution:
+The issue was caused by a network latency spike between Kafka brokers and the Kubernetes cluster. Restarting the consumer pods and rebalancing the consumer group resolved the lag.
+
+Status:
+Resolved
+
+Comments / Timeline:
+Platform-Team - L1: Investigating Kafka consumer metrics.
+Waqar Mansoor: Customers are reporting delayed payments.
+Platform-Team - L1: Identified network latency impacting consumption rate.
+Waqar Mansoor: Any ETA on resolution?
+Platform-Team - L1: Restarted consumer pods and triggered rebalance. Lag is reducing.
+Waqar Mansoor: Confirmed, backlog is clearing.
+Platform-Team - L1: Closing the incident.
+
+---------------------------------------------------------------------------------------------
+
+INCIDENT # 4
+
+Title: Database Connection Pool Exhaustion
+
+Description:
+Multiple services are experiencing failures due to exhaustion of database connection pools, leading to request failures and degraded performance.
+
+2024-03-02 12:05:33 ERROR [Application: inventory-service] Unable to acquire JDBC connection from pool. Timeout after 30000ms.
+
+Immediate intervention is required to restore normal service operation.
+
+Reporter:
+Waqar Mansoor
+
+Assignee:
+DBA-Team - L2
+
+Resolution:
+The issue was caused by a connection leak introduced in the latest deployment. The faulty code was rolled back and the connection pool configuration was tuned to prevent recurrence.
+
+Status:
+Resolved
+
+Comments / Timeline:
+DBA-Team - L2: Reviewing DB metrics and connection pool usage.
+Waqar Mansoor: Several downstream services are failing.
+DBA-Team - L2: Identified connection leak in recent release. Rolling back now.
+Waqar Mansoor: Please confirm once rollback is complete.
+DBA-Team - L2: Rollback completed and connection counts are normal.
+Waqar Mansoor: Confirmed service is stable.
+DBA-Team - L2: Closing the incident.
+
+------------------------------------------------------------------------------------------------------
+
+INCIDENT # 5
+
+Title: Memory Leak in Recommendation Engine
+
+Description:
+The recommendation-engine pods are experiencing continuous memory growth, leading to frequent OOM kills and pod restarts.
+
+2024-03-02 13:18:59 ERROR [Application: recommendation-engine] Java heap space exceeded. Pod terminated.
+
+Immediate remediation is required to stabilize the service.
+
+Reporter:
+Waqar Mansoor
+
+Assignee:
+Backend-Team - L2
+
+Resolution:
+The issue was caused by unbounded object caching. Cache eviction logic was implemented and memory limits were adjusted. A new version was deployed, resolving the memory leak.
+
+Status:
+Resolved
+
+Comments / Timeline:
+Backend-Team - L2: Performing heap dump analysis.
+Waqar Mansoor: Pods are restarting frequently.
+Backend-Team - L2: Found unbounded cache growth. Implementing eviction policy.
+Waqar Mansoor: Let me know once deployed.
+Backend-Team - L2: Fix deployed, memory usage stabilized.
+Waqar Mansoor: Verified, looks good.
+Backend-Team - L2: Closing the incident.
