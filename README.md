@@ -14,6 +14,7 @@
 - OpenAI – gpt-5-nano
 - LangSmith
 - InMemoryVectorStore (for RAG)
+- uv
 
 ---
 
